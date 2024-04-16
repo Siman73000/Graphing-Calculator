@@ -144,7 +144,7 @@ def button_eq():
     except ZeroDivisionError:
         e.config(state="normal")
         e.delete(0, END)
-        e.insert(0, "Bruh really thought he could divide by zero")
+        e.insert(0, "Undefined")
         e.config(state="disabled")
 
 
