@@ -27,12 +27,49 @@ ax.axvline(x=0, color='black', linewidth=1)
 # Defining Y= function and graph
 
 def trig_graph():
+    root.iconify()
     global trig_graph_window, h, canvas, error_label1
     trig_graph_window = Toplevel(root)
     trig_graph_window.title("Graph")
     trig_graph_window.resizable(False, False)
+    Label(trig_graph_window, text="Enter Trig Function:", padx=10, pady=10).grid(row=0, column=0)
+    h = Entry(trig_graph_window, border=5, width=25, fg='black', bg='white').grid(row=1, column=0)
+    error_label1 = Label(trig_graph_window, text="", fg="red").grid(row=2, column=0)
+    ax.set_xlim(-10, 10)
+    ax.set_ylim(-10, 10)
+    ax.set_xticks(np.arange(-10, 11, 1))
+    ax.set_yticks(np.arange(-10, 11, 1))
+    ax.set_aspect('equal')
+    ax.grid(True)
+    canvas = FigureCanvasTkAgg(fig, master=trig_graph_window)
+    canvas.get_tk_widget().grid(row=4, column=0)
+    plot_trig_button = Button(trig_graph_window, text="Plot", command=plot_trig_graph)
+    plot_trig_button.grid(row=3, column=0, pady=10)
+
+def plot_trig_graph():
+    global ax, error_label1
+    eqn1 = h.get()
+    try:
+        m1, b1 = [float(x.strip()) for x in eqn1.split('x') if x.strip()]
+    except:
+        error_label1.config(text="Syntax Error: 1")
+        return
+    x1 = np.linspace(-10, 10, 100)
+    y1 = m1 * x1 + b1
+    ax.clear()
+    ax.plot(x1, y1)
+    ax.set_xlim(-10, 10)
+    ax.set_ylim(-10, 10)
+    ax.set_xticks(np.arange(-10, 11, 1))
+    ax.set_yticks(np.arange(-10, 11, 1))
+    ax.grid(True)
+    ax.axhline(y1=0, color='black', linewidth=1)
+    ax.axvline(x1=0, color='black', linewidth=1)
+    canvas.draw()
+    error_label1.config(text="")
 
 def button_graph():
+    root.iconify()
     global graph_window, g, canvas, error_label
     graph_window = Toplevel(root)
     graph_window.title("Coordinate Graph")
@@ -173,6 +210,7 @@ button_add = Button(root, bg='light grey', text="+", padx=39, pady=20, command=l
 button_clear = Button(root, bg='light grey', text="Clear", padx=29, pady=20, command=lambda: button_cl())
 button_equal = Button(root, bg='light grey', text="=", padx=39, pady=20, command=lambda: button_eq())
 button_y = Button(root, bg='light grey', text='Y=', padx=39, pady=20, command=lambda: button_graph())
+button_trig = Button(root, bg='light grey', text='Trig', padx=39, pady=20, command=lambda: trig_graph())
 
 # Put the buttons on the screen
 
@@ -200,6 +238,8 @@ button_o.grid(row=4, column=1)
 button_subtract.grid(row=2, column=3)
 button_divide.grid(row=4, column=3)
 button_y.grid(row=5, column=1)
+
+button_trig.grid(row=5, column=2)
 
 
 root.mainloop()
