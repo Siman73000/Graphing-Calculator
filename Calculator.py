@@ -26,6 +26,12 @@ ax.axvline(x=0, color='black', linewidth=1)
 
 # Defining Y= function and graph
 
+def trig_graph():
+    global trig_graph_window, h, canvas, error_label1
+    trig_graph_window = Toplevel(root)
+    trig_graph_window.title("Graph")
+    trig_graph_window.resizable(False, False)
+
 def button_graph():
     global graph_window, g, canvas, error_label
     graph_window = Toplevel(root)
