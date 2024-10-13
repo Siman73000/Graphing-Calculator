@@ -5,7 +5,6 @@ from matplotlib.figure import Figure
 import numpy as np
 
 root = Tk()
-#root.iconbitmap("C:\Users\Simon\OneDrive\Desktop\PythonProjects\Icons\calc.ico")
 root.title("Graphing Calculator")
 root.geometry("359x400")
 root.resizable(False,False)
