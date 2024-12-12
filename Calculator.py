@@ -9,8 +9,6 @@ root.title("Graphing Calculator")
 root.geometry("359x400")
 root.resizable(False,False)
 root.config(bg="grey")
-# Making text box
-
 
 
 e = Entry(root, borderwidth=5, width=50, fg='black', state="disabled")
